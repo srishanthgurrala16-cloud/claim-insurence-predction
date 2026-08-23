@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction{% endblock %}
+
+{% block content %}
+
+<div class="page">
+
+    <h1>Insurance Claim Loss Prediction</h1>
+
+    <form>
+        <h2>Customer Information</h2>
+        <label>Customer Group ID</label>
+        <input type="number" placeholder="Enter customer group id">
+
+        <h2>Policy Information</h2>
+        <label>Policy Category (cat1)</label>
+        <select>
+            <option>Option A</option>
+            <option>Option B</option>
+        </select>
+
+        <h2>Claim Information</h2>
+        <label>Continuous Metric (cont1)</label>
+        <input type="text" placeholder="Enter continuous metric value">
+
+        <h2>Coverage Information</h2>
+        <label>Coverage Level Code</label>
+        <input type="text" placeholder="Enter coverage level">
+
+        <button type="button">Predict Claim Loss</button>
+    </form>
+
+</div>
+
+{% endblock %}

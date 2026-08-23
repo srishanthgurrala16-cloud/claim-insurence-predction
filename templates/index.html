@@ -1,597 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CreditFair — AI-Powered Credit Risk Analysis and Loan Default Prediction. A supervised machine learning system estimating loan default risks using historical data.">
-  <title>CreditFair — Loan Default Risk Prediction</title>
-  
-  <!-- Inter Web Font from Google Fonts for modern typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="../Static/style.css">
-</head>
-<body>
+{% extends "base.html" %}
 
-  <!-- ==========================================
-       1. NAVBAR
-       ========================================== -->
-  <header class="header">
-    <div class="container">
-      <div class="logo-group">
-        <div class="logo-row">
-          <span class="logo-text">CreditFair<span class="logo-dot">.</span></span>
-          <span class="badge badge-info">ML &bull; Binary Classification</span>
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="page">
+
+    <h1>ClaimWise Insurance Prediction System</h1>
+
+    <h2>Project Introduction</h2>
+
+    <p>
+        ClaimWise Insurance Prediction System is a machine
+        learning project designed to analyze insurance claim
+        data and predict claim loss.
+    </p>
+
+    <h2>Project Overview</h2>
+
+    <p>
+        The project follows a complete machine learning
+        workflow including data understanding, cleaning,
+        missing value handling, categorical encoding,
+        feature scaling and dataset preparation.
+    </p>
+
+    <h2>Key Project Statistics</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Dataset Records</h3>
+            <h2>50,000</h2>
         </div>
-        <span class="logo-subtitle">AI-Powered Credit Risk Analysis</span>
-      </div>
-      <nav class="nav-links">
-        <a href="#" class="nav-link">Home</a>
-        <a href="#risk-predictor" class="nav-link">Risk Predictor</a>
-        <a href="#model-info" class="nav-link">About Model</a>
-      </nav>
+
+        <div class="card">
+            <h3>Original Columns</h3>
+            <h2>132</h2>
+        </div>
+
+        <div class="card">
+            <h3>Input Features</h3>
+            <h2>130</h2>
+        </div>
+
+        <div class="card">
+            <h3>Training Records</h3>
+            <h2>40,000</h2>
+        </div>
+
+        <div class="card">
+            <h3>Testing Records</h3>
+            <h2>10,000</h2>
+        </div>
+
+        <div class="card">
+            <h3>Missing Values</h3>
+            <h2>0</h2>
+        </div>
+
     </div>
-  </header>
 
-  <!-- ==========================================
-       2. HERO SECTION
-       ========================================== -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <h1>Predict Loan Default Risk Before It Becomes a Problem</h1>
-        <p>CreditFair uses historical loan and credit information to estimate whether a loan is likely to be fully repaid or become a default. Powering smart decisions with binary classification.</p>
-        <div class="hero-actions">
-          <a href="#risk-predictor" class="btn btn-primary">Start Risk Assessment</a>
-          <a href="#model-info" class="btn btn-secondary">View Model Details</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="demo-card">
-          <div class="demo-card-header">
-            <span class="demo-card-title">AI Credit Analysis</span>
-            <span class="badge badge-success">Live Demo</span>
-          </div>
-          <div class="demo-score-box">
-            <div class="demo-score-val">82%</div>
-            <div class="demo-score-lbl">Repayment Probability Score</div>
-          </div>
-          <div class="demo-metrics">
-            <div>
-              <div class="demo-metric-label">Status</div>
-              <div class="demo-metric-value status-low">Low Risk</div>
-            </div>
-            <div>
-              <div class="demo-metric-label">Confidence</div>
-              <div class="demo-metric-value">91%</div>
-            </div>
-          </div>
-          <div class="demo-watermark">
-            &bull; Static Demonstration Output &bull;
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+</div>
 
-  <!-- ==========================================
-       3. RISK PREDICTOR SECTION (FORM & RESULTS)
-       ========================================== -->
-  <section id="risk-predictor" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Loan Risk Assessment</h2>
-        <p>Enter borrower and loan information to estimate default risk. The prediction is calibrated using historically accepted Lending Club data points.</p>
-      </div>
-
-      <div class="predictor-layout">
-        <!-- Input Form -->
-        <div class="predictor-form-card">
-          <form onsubmit="return false;">
-            
-            <!-- GROUP 1: LOAN DETAILS -->
-            <div class="form-group-section">
-              <h3 class="form-group-title">
-                <span class="number">1</span>
-                Loan Details
-              </h3>
-              <div class="form-grid-3">
-                <div class="form-field">
-                  <label for="loan-amount">Loan Amount</label>
-                  <div class="input-container has-addon-left">
-                    <span class="input-addon-left">$</span>
-                    <input type="number" id="loan-amount" placeholder="10,000" min="500" max="40000" required>
-                  </div>
-                  <span class="field-helper">Amount requested ($500 - $40,000)</span>
-                </div>
-                
-                <div class="form-field">
-                  <label for="loan-term">Loan Term</label>
-                  <select id="loan-term">
-                    <option value="36">36 Months</option>
-                    <option value="60">60 Months</option>
-                  </select>
-                  <span class="field-helper">Repayment period length</span>
-                </div>
-
-                <div class="form-field">
-                  <label for="interest-rate">Interest Rate</label>
-                  <div class="input-container has-addon-right">
-                    <input type="text" id="interest-rate" placeholder="12.5" required>
-                    <span class="input-addon-right">%</span>
-                  </div>
-                  <span class="field-helper">Annual interest percentage</span>
-                </div>
-              </div>
-
-              <div class="form-grid-2">
-                <div class="form-field">
-                  <label for="monthly-installment">Monthly Installment</label>
-                  <div class="input-container has-addon-left">
-                    <span class="input-addon-left">$</span>
-                    <input type="text" id="monthly-installment" placeholder="334.54" required>
-                  </div>
-                  <span class="field-helper">Monthly payment amount</span>
-                </div>
-
-                <div class="form-field">
-                  <label for="loan-purpose">Loan Purpose</label>
-                  <select id="loan-purpose">
-                    <option value="debt_consolidation">Debt Consolidation</option>
-                    <option value="credit_card">Credit Card Payoff</option>
-                    <option value="home_improvement">Home Improvement</option>
-                    <option value="major_purchase">Major Purchase</option>
-                    <option value="small_business">Small Business</option>
-                    <option value="other">Other</option>
-                  </select>
-                  <span class="field-helper">Primary purpose category</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- GROUP 2: BORROWER PROFILE -->
-            <div class="form-group-section">
-              <h3 class="form-group-title">
-                <span class="number">2</span>
-                Borrower Profile
-              </h3>
-              <div class="form-grid-2">
-                <div class="form-field">
-                  <label for="annual-income">Annual Income</label>
-                  <div class="input-container has-addon-left">
-                    <span class="input-addon-left">$</span>
-                    <input type="number" id="annual-income" placeholder="75,000" required>
-                  </div>
-                  <span class="field-helper">Total self-reported yearly income</span>
-                </div>
-
-                <div class="form-field">
-                  <label for="employment-length">Employment Length</label>
-                  <select id="employment-length">
-                    <option value="10+">10+ Years</option>
-                    <option value="5">5 Years</option>
-                    <option value="3">3 Years</option>
-                    <option value="1">1 Year</option>
-                    <option value="0">&lt; 1 Year</option>
-                  </select>
-                  <span class="field-helper">Length of current employment</span>
-                </div>
-              </div>
-
-              <div class="form-grid-2">
-                <div class="form-field">
-                  <label for="home-ownership">Home Ownership</label>
-                  <select id="home-ownership">
-                    <option value="mortgage">Mortgage</option>
-                    <option value="rent">Rent</option>
-                    <option value="own">Own</option>
-                  </select>
-                  <span class="field-helper">Current housing status</span>
-                </div>
-
-                <div class="form-field">
-                  <label for="verification-status">Verification Status</label>
-                  <select id="verification-status">
-                    <option value="verified">Source Verified</option>
-                    <option value="not_verified">Not Verified</option>
-                  </select>
-                  <span class="field-helper">Income verification check status</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- GROUP 3: CREDIT PROFILE -->
-            <div class="form-group-section">
-              <h3 class="form-group-title">
-                <span class="number">3</span>
-                Credit Profile
-              </h3>
-              <div class="form-grid-3">
-                <div class="form-field">
-                  <label for="fico-score">FICO Score</label>
-                  <input type="number" id="fico-score" placeholder="720" min="300" max="850" required>
-                  <span class="field-helper">Applicant credit score</span>
-                </div>
-
-                <div class="form-field">
-                  <label for="dti">Debt-to-Income (DTI)</label>
-                  <div class="input-container has-addon-right">
-                    <input type="text" id="dti" placeholder="15.5" required>
-                    <span class="input-addon-right">%</span>
-                  </div>
-                  <span class="field-helper">Ratio of monthly debt to income</span>
-                </div>
-
-                <div class="form-field">
-                  <label for="open-accounts">Open Credit Accounts</label>
-                  <input type="number" id="open-accounts" placeholder="11" required>
-                  <span class="field-helper">Number of active credit lines</span>
-                </div>
-              </div>
-
-              <div class="form-grid-2">
-                <div class="form-field">
-                  <label for="total-accounts">Total Credit Accounts</label>
-                  <input type="number" id="total-accounts" placeholder="24" required>
-                  <span class="field-helper">Total open + closed lines on file</span>
-                </div>
-
-                <div class="form-field">
-                  <label for="public-records">Public Records</label>
-                  <input type="number" id="public-records" placeholder="0" required>
-                  <span class="field-helper">Number of derogatory public filings</span>
-                </div>
-              </div>
-
-              <div class="form-grid-2">
-                <div class="form-field">
-                  <label for="revolving-balance">Revolving Balance</label>
-                  <div class="input-container has-addon-left">
-                    <span class="input-addon-left">$</span>
-                    <input type="number" id="revolving-balance" placeholder="14,200" required>
-                  </div>
-                  <span class="field-helper">Total unpaid credit card balance</span>
-                </div>
-
-                <div class="form-field">
-                  <label for="revolving-utilization">Revolving Utilization</label>
-                  <div class="input-container has-addon-right">
-                    <input type="text" id="revolving-utilization" placeholder="42.5" required>
-                    <span class="input-addon-right">%</span>
-                  </div>
-                  <span class="field-helper">Percent of total credit line used</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- PREDICTION BUTTON -->
-            <div class="submit-btn-container">
-              <button type="submit" class="btn btn-primary btn-full">Analyze Credit Risk</button>
-            </div>
-
-          </form>
-        </div>
-
-        <!-- Static Prediction Results Sidebar -->
-        <div class="result-sidebar">
-          <div class="result-card">
-            <div class="result-header">
-              <h3 class="result-title">
-                Credit Risk Result
-                <span class="badge badge-info">Static Demo</span>
-              </h3>
-            </div>
-            
-            <div class="result-score-section">
-              <span class="score-main">82</span>
-              <span class="score-total">/ 100</span>
-            </div>
-
-            <div class="result-status-badge status-low-risk">
-              &bull; Low Default Risk
-            </div>
-
-            <p class="result-message">
-              The applicant shows characteristics strongly associated with a lower probability of loan default. Past historical cohorts matching this profile demonstrate high loan repayment rates.
-            </p>
-
-            <!-- CSS Progress Bar -->
-            <div class="progress-container">
-              <div class="progress-label-row">
-                <span>Risk Index (High values indicate Safety)</span>
-                <span>82%</span>
-              </div>
-              <div class="progress-bar-bg">
-                <div class="progress-bar-fill"></div>
-              </div>
-            </div>
-
-            <!-- Risk Metrics -->
-            <div class="result-meta-row">
-              <span class="meta-label">Risk Level</span>
-              <span class="meta-val text-success">Low Risk</span>
-            </div>
-            <div class="result-meta-row">
-              <span class="meta-label">Model Confidence</span>
-              <span class="meta-val">91%</span>
-            </div>
-            <div class="result-meta-row">
-              <span class="meta-label">Likely Outcome</span>
-              <span class="meta-val text-success">&#x2713; Fully Paid</span>
-            </div>
-
-            <!-- Important static disclaimer -->
-            <div class="static-notice">
-              <span class="static-notice-icon">&#x26A0;</span>
-              <span>This is a static mockup demonstration for presentation purposes. No data is stored or computed on a live machine learning model.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       4. MODEL INFORMATION SECTION
-       ========================================== -->
-  <section id="model-info" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>How CreditFair Works</h2>
-        <p>The backend modeling engine leverages statistical patterns in historical credit underwriting data to predict default probabilities.</p>
-      </div>
-
-      <div class="model-info-grid">
-        <div class="info-card">
-          <div class="info-num">01</div>
-          <h3 class="info-title">Data Source</h3>
-          <p class="info-desc">Trained on historical Lending Club accepted loan records containing real consumer credit outcomes.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-num">02</div>
-          <h3 class="info-title">19 Features</h3>
-          <p class="info-desc">Considers loan metrics, credit lines, DTI, FICO, public records, and homeownership details.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-num">03</div>
-          <h3 class="info-title">ML Classifier</h3>
-          <p class="info-desc">Built using supervised Binary Classification algorithms mapping historical loans to outcome classes.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-num">04</div>
-          <h3 class="info-title">Prediction Goal</h3>
-          <p class="info-desc">Establishes if a borrower will successfully pay in full or eventually charge off.</p>
-        </div>
-      </div>
-
-      <!-- Pipeline Chart -->
-      <div class="pipeline-container">
-        <div class="pipeline-title">Model Inference & Training Pipeline</div>
-        <div class="pipeline-flow">
-          <div class="pipeline-step">DATA</div>
-          <div class="pipeline-arrow">&rarr;</div>
-          <div class="pipeline-step">PREPROCESSING</div>
-          <div class="pipeline-arrow">&rarr;</div>
-          <div class="pipeline-step">FEATURE ENG.</div>
-          <div class="pipeline-arrow">&rarr;</div>
-          <div class="pipeline-step">ML MODEL</div>
-          <div class="pipeline-arrow">&rarr;</div>
-          <div class="pipeline-step pipeline-step-active">RISK PREDICTION</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       5. FEATURE SECTION
-       ========================================== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2>What Does CreditFair Analyze?</h2>
-        <p>A closer look at some of the key indicators selected from the 19 input features that carry the highest statistical weight in our predictor.</p>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon-text">&#x1F4B5;</div>
-          <h3 class="feature-title">Loan Amount</h3>
-          <p class="feature-desc">The total amount of capital requested by the applicant.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon-text">&#x25B2;</div>
-          <h3 class="feature-title">Interest Rate</h3>
-          <p class="feature-desc">The cost of borrowing, which reflects baseline market risk assessments.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon-text">&#x1F4BC;</div>
-          <h3 class="feature-title">Annual Income</h3>
-          <p class="feature-desc">Borrower’s yearly earnings, determining baseline debt repayment capability.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon-text">&#x1F4C5;</div>
-          <h3 class="feature-title">Employment Length</h3>
-          <p class="feature-desc">Measures job and income stream stability over time.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon-text">&#x1F3AF;</div>
-          <h3 class="feature-title">FICO Score</h3>
-          <p class="feature-desc">Industry-standard credit rating showing historical trustworthiness.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon-text">&#x2696;</div>
-          <h3 class="feature-title">DTI Ratio</h3>
-          <p class="feature-desc">Compares total monthly debt obligations against gross monthly income.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon-text">&#x1F4C8;</div>
-          <h3 class="feature-title">Credit Utilization</h3>
-          <p class="feature-desc">The percentage of revolving credit limits currently being drawn.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon-text">&#x1F551;</div>
-          <h3 class="feature-title">Credit History</h3>
-          <p class="feature-desc">Duration of active credit files and total available credit accounts.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       6. TARGET VARIABLE SECTION
-       ========================================== -->
-  <section class="section target-section-bg">
-    <div class="container">
-      <div class="section-header">
-        <h2>Target Variable: loan_status</h2>
-        <p>The prediction is framing default risk as a binary classification problem based on the historical settlement outcome of loans.</p>
-      </div>
-
-      <div class="target-layout">
-        <p class="target-explainer">The model is optimized to predict one of two binary statuses:</p>
-        <div class="target-cards">
-          <!-- Class 0 -->
-          <div class="target-val-card risk-low">
-            <div class="target-val-status">Low Default Risk</div>
-            <h3 class="target-val-title">Fully Paid</h3>
-            <span class="target-val-class">Class 0</span>
-          </div>
-
-          <!-- Class 1 -->
-          <div class="target-val-card risk-high">
-            <div class="target-val-status">High Default Risk</div>
-            <h3 class="target-val-title">Charged Off</h3>
-            <span class="target-val-class">Class 1</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       7. DATASET STATISTICS SECTION
-       ========================================== -->
-  <section class="section stats-section-bg">
-    <div class="container">
-      <div class="section-header">
-        <h2>Dataset Statistics</h2>
-        <p>Historical dimensions and training metadata used to parameterize the predictive model.</p>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-num">50,000</div>
-          <div class="stat-lbl">Records Used</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-num">20</div>
-          <div class="stat-lbl">Selected Columns</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-num">19</div>
-          <div class="stat-lbl">Input Features</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-num">1</div>
-          <div class="stat-lbl">Target Variable</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-num">2007–18</div>
-          <div class="stat-lbl">Historical Range</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       8. ABOUT PROJECT SECTION
-       ========================================== -->
-  <section class="section">
-    <div class="container about-layout">
-      <div class="about-content">
-        <h2>About CreditFair</h2>
-        <p>CreditFair is designed as an educational machine learning project demonstrating how supervised learning can be applied to historical loan data to identify potential default risk.</p>
-        <p>By extracting insights from historical borrower profiles and repayment patterns, this dashboard serves as an interactive showcase of predictive analytics in risk scoring and fintech automation.</p>
-        <div class="about-tags">
-          <span class="about-tag">Supervised Learning</span>
-          <span class="about-tag">Binary Classification</span>
-          <span class="about-tag">Loan Risk Prediction</span>
-          <span class="about-tag">Historical Lending Club Dataset</span>
-        </div>
-      </div>
-      <div class="about-illustration">
-        <div class="about-ill-row">
-          <span class="about-ill-lbl">Model Architecture</span>
-          <span class="about-ill-val">Logistic Regression / XGBoost</span>
-        </div>
-        <div class="about-ill-row">
-          <span class="about-ill-lbl">Evaluation Metric</span>
-          <span class="about-ill-val">ROC-AUC / F1-Score</span>
-        </div>
-        <div class="about-ill-row">
-          <span class="about-ill-lbl">Model Calibration</span>
-          <span class="about-ill-val">Probability Thresholding</span>
-        </div>
-        <div class="about-ill-row">
-          <span class="about-ill-lbl">Target Dataset</span>
-          <span class="about-ill-val">Lending Club Loans</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       9. FOOTER
-       ========================================== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="footer-logo">CreditFair.</div>
-          <p>Loan Default Risk Prediction using Machine Learning. Harnessing historical financial insights to build a fairer, safer credit landscape.</p>
-        </div>
-        <div class="footer-links">
-          <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#risk-predictor">Risk Predictor</a></li>
-              <li><a href="#model-info">About Model</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>ML Details</h4>
-            <ul>
-              <li><a href="#model-info">Supervised Learning</a></li>
-              <li><a href="#model-info">Binary Classification</a></li>
-              <li><a href="#model-info">Lending Club Dataset</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 CreditFair Project. All Rights Reserved.</span>
-        <span>Academic Machine Learning Project</span>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+{% endblock %}

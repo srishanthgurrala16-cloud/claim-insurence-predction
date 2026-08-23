@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Preprocessing{% endblock %}
+
+{% block content %}
+
+<div class="page">
+
+    <h1>Data Preprocessing Workflow</h1>
+
+    <div class="cards">
+        <div class="card">
+            <h3>1. Dataset Loading</h3>
+            <p>Read raw claim dataset (50,000 records × 132 features) and perform structural data audit.</p>
+        </div>
+
+        <div class="card">
+            <h3>2. Duplicate Removal</h3>
+            <p>Identify and drop duplicate rows to preserve data integrity across the dataset.</p>
+        </div>
+
+        <div class="card">
+            <h3>3. Missing Value Handling</h3>
+            <p>Missing numerical values are handled using median imputation and categorical values using mode imputation.</p>
+        </div>
+
+        <div class="card">
+            <h3>4. Numerical Feature Imputation</h3>
+            <p>Replace missing continuous values (cont1–cont14) with median values.</p>
+        </div>
+
+        <div class="card">
+            <h3>5. Categorical Feature Imputation</h3>
+            <p>Clean text whitespace and replace missing categorical values (cat1–cat116) with mode values.</p>
+        </div>
+
+        <div class="card">
+            <h3>6. Categorical Encoding</h3>
+            <p>Apply LabelEncoder to convert categorical text features into integer numerical representations.</p>
+        </div>
+
+        <div class="card">
+            <h3>7. Feature Scaling</h3>
+            <p>Standardize continuous numerical attributes using StandardScaler fit on training features.</p>
+        </div>
+
+        <div class="card">
+            <h3>8. Target Separation</h3>
+            <p>Separate target column 'loss' from input feature matrix X.</p>
+        </div>
+
+        <div class="card">
+            <h3>9. Train-Test Split</h3>
+            <p>Split preprocessed dataset into 80% Training (40,000) and 20% Testing (10,000) subsets.</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

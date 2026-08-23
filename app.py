@@ -1,60 +1,47 @@
-import http.server
-import socketserver
-import webbrowser
-import os
+from flask import Flask, render_template
 
-# Port configuration
-PORT = 8080
-DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__)
 
-class SafeHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
-    """
-    Custom handler to route request paths to templates/index.html and Static/style.css
-    based on the project structure.
-    """
-    def do_GET(self):
-        # Route default page requests to the templates folder
-        if self.path == '/' or self.path == '/index.html':
-            self.path = '/templates/index.html'
-        # Route stylesheet requests to the Static folder
-        elif self.path == '/style.css':
-            self.path = '/Static/style.css'
-            
-        return super().do_GET()
+@app.route("/")
+@app.route("/index")
+def index():
+    return render_template("index.html")
 
-def run_server():
-    global PORT
-    # Set the working directory to the directory of this file
-    os.chdir(DIRECTORY)
-    
-    # Configure the TCP server to allow reusing the address
-    socketserver.TCPServer.allow_reuse_address = True
-    
-    while PORT < 8100:
-        try:
-            with socketserver.TCPServer(("", PORT), SafeHTTPRequestHandler) as httpd:
-                url = f"http://localhost:{PORT}/index.html"
-                print("==================================================")
-                print("  CreditFair Loan Default Risk Prediction Server  ")
-                print("==================================================")
-                print(f" Script Directory: {DIRECTORY}")
-                print(f" Working Directory: {os.getcwd()}")
-                print(f" Serving site locally at: {url}")
-                print(" Press Ctrl+C to stop the server.")
-                print("==================================================")
-                
-                # Automatically open the user's default browser window
-                webbrowser.open(url)
-                
-                # Keep serving requests until interrupted
-                httpd.serve_forever()
-                break
-        except OSError as e:
-            print(f"Port {PORT} is busy, trying port {PORT + 1}...")
-            PORT += 1
-        except KeyboardInterrupt:
-            print("\n[Server stopped successfully]")
-            break
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/dataset")
+def dataset():
+    return render_template("dataset.html")
+
+@app.route("/preprocessing")
+def preprocessing():
+    return render_template("preprocessing.html")
+
+@app.route("/visualization")
+def visualization():
+    return render_template("visualization.html")
+
+@app.route("/models")
+def models():
+    return render_template("models.html")
+
+@app.route("/prediction")
+def prediction():
+    return render_template("prediction.html")
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+@app.route("/reports")
+def reports():
+    return render_template("reports.html")
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 if __name__ == "__main__":
-    run_server()
+    app.run(debug=True, port=5000)
