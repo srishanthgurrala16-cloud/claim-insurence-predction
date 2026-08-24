@@ -19,6 +19,8 @@ The project focuses on understanding, cleaning, preprocessing, encoding, scaling
 - Split the dataset into training and testing data.
 - Predict insurance claim loss using Machine Learning.
 
+# claim-insurence-predction
+
 ---
 
 ## 📊 Dataset Information
