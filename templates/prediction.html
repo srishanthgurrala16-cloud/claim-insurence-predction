@@ -1,34 +1,137 @@
 {% extends "base.html" %}
 
-{% block title %}Prediction{% endblock %}
+{% block title %}Prediction | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>Insurance Claim Loss Prediction</h1>
+    <div class="page-header">
+        <span class="page-label">PREDICTION INTERFACE</span>
+        <h1>Insurance Claim Loss Prediction</h1>
+        <p>Enter insurance information to estimate potential claim loss.</p>
+    </div>
 
-    <form>
-        <h2>Customer Information</h2>
-        <label>Customer Group ID</label>
-        <input type="number" placeholder="Enter customer group id">
+    <!-- APPLICATION-STYLE FORM -->
+    <form onsubmit="return false;">
+        
+        <!-- GROUP 1: CUSTOMER INFORMATION -->
+        <div class="form-section">
+            <div class="form-section-title">👤 GROUP 1: CUSTOMER INFORMATION</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" min="18" max="100" placeholder="e.g. 38">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Annual Income ($)</label>
+                    <input type="number" step="500" placeholder="e.g. 65000">
+                </div>
+                <div class="form-group">
+                    <label>Education</label>
+                    <select>
+                        <option value="">Select Education</option>
+                        <option value="high_school">High School</option>
+                        <option value="bachelor">Bachelor's Degree</option>
+                        <option value="master">Master's / Higher</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Occupation</label>
+                    <input type="text" placeholder="e.g. Financial Analyst">
+                </div>
+            </div>
+        </div>
 
-        <h2>Policy Information</h2>
-        <label>Policy Category (cat1)</label>
-        <select>
-            <option>Option A</option>
-            <option>Option B</option>
-        </select>
+        <!-- GROUP 2: POLICY INFORMATION -->
+        <div class="form-section">
+            <div class="form-section-title">📄 GROUP 2: POLICY INFORMATION</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Policy Type</label>
+                    <select>
+                        <option value="">Select Policy Type</option>
+                        <option value="auto">Automobile Insurance</option>
+                        <option value="property">Property / Homeowners</option>
+                        <option value="commercial">Commercial Policy</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Policy Duration (Years)</label>
+                    <input type="number" min="1" max="50" placeholder="e.g. 4">
+                </div>
+                <div class="form-group">
+                    <label>Premium ($)</label>
+                    <input type="number" step="50" placeholder="e.g. 1250">
+                </div>
+                <div class="form-group">
+                    <label>Coverage Amount ($)</label>
+                    <input type="number" step="1000" placeholder="e.g. 100000">
+                </div>
+            </div>
+        </div>
 
-        <h2>Claim Information</h2>
-        <label>Continuous Metric (cont1)</label>
-        <input type="text" placeholder="Enter continuous metric value">
+        <!-- GROUP 3: CLAIM INFORMATION -->
+        <div class="form-section">
+            <div class="form-section-title">📋 GROUP 3: CLAIM INFORMATION</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Claim Type</label>
+                    <select>
+                        <option value="">Select Claim Type</option>
+                        <option value="collision">Vehicle Collision</option>
+                        <option value="property_damage">Property Damage</option>
+                        <option value="liability">Third-Party Liability</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Claim Amount ($)</label>
+                    <input type="number" step="100" placeholder="e.g. 4800">
+                </div>
+                <div class="form-group">
+                    <label>Incident Information</label>
+                    <input type="text" placeholder="e.g. Single vehicle side impact">
+                </div>
+            </div>
+        </div>
 
-        <h2>Coverage Information</h2>
-        <label>Coverage Level Code</label>
-        <input type="text" placeholder="Enter coverage level">
+        <!-- GROUP 4: ADDITIONAL INFORMATION -->
+        <div class="form-section">
+            <div class="form-section-title">⚙️ GROUP 4: ADDITIONAL INFORMATION</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" placeholder="e.g. Metropolitan Zone 4">
+                </div>
+                <div class="form-group">
+                    <label>Risk-related Information</label>
+                    <select>
+                        <option value="">Select Risk Category</option>
+                        <option value="low">Low Risk Profile</option>
+                        <option value="medium">Medium Risk Profile</option>
+                        <option value="high">High Risk Profile</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Other Relevant Information</label>
+                    <input type="text" placeholder="e.g. Continuous feature metric">
+                </div>
+            </div>
+        </div>
 
-        <button type="button">Predict Claim Loss</button>
+        <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 10px;">PREDICT CLAIM LOSS</button>
+
+        <p class="form-disclaimer">"Prediction will be connected to the trained model."</p>
+
     </form>
 
 </div>

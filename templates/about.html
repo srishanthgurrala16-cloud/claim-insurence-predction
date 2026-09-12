@@ -1,47 +1,72 @@
 {% extends "base.html" %}
 
-{% block title %}About{% endblock %}
+{% block title %}About | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>About ClaimWise Insurance Prediction System</h1>
+    <div class="page-header">
+        <span class="page-label">ABOUT CLAIMWISE</span>
+        <h1>Understanding Insurance Claims Through Machine Learning</h1>
+        <p>A systematic data engineering and predictive modeling project for insurance claim analytics.</p>
+    </div>
 
-    <h2>Project Introduction</h2>
+    <!-- TWO-COLUMN SECTION: OVERVIEW & PROBLEM STATEMENT -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <div class="card">
+            <h2 style="margin-top: 0;">Project Overview</h2>
+            <p>
+                ClaimWise Insurance Prediction System is an academic machine learning project designed to process historical insurance claim datasets, execute systematic feature engineering, and estimate claim loss values using regression models.
+            </p>
+        </div>
 
+        <div class="card">
+            <h2 style="margin-top: 0;">Problem Statement</h2>
+            <p>
+                Insurance companies process vast quantities of customer, policy, and claim records daily. Manual claim loss assessment is labor-intensive and slow. Machine learning algorithms analyze historical patterns in complex claim data to provide rapid, data-driven estimations of claim loss.
+            </p>
+        </div>
+    </div>
+
+    <!-- OBJECTIVES -->
+    <h2>Objectives</h2>
+    <div class="info-box">
+        <ul style="margin-bottom: 0;">
+            <li>Incorporate 50,000 historical insurance records for empirical analysis.</li>
+            <li>Clean raw dataset by removing redundant identifiers and handling missing values.</li>
+            <li>Encode categorical text attributes into numerical representations.</li>
+            <li>Standardize continuous numerical attributes for balanced model learning.</li>
+            <li>Split preprocessed dataset into 40,000 training and 10,000 testing subsets.</li>
+            <li>Prepare features for regression-based claim loss prediction.</li>
+        </ul>
+    </div>
+
+    <!-- MACHINE LEARNING APPROACH -->
+    <h2>Machine Learning Approach</h2>
     <p>
-        ClaimWise Insurance Prediction System is a machine
-        learning project designed to analyze insurance claim
-        data and predict claim loss.
+        ClaimWise treats claim loss prediction as a <strong>continuous regression task</strong>. Models are trained on preprocessed predictor matrices (\(X\)) containing 130 features to predict the continuous target variable (<code>loss</code>).
     </p>
 
-    <h2>Objectives</h2>
+    <!-- TWO-COLUMN SECTION: TECH STACK & WHY CLAIMWISE -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 24px;">
+        <div class="card">
+            <h3 style="color: var(--accent-primary); font-size: 14px; text-transform: uppercase;">Technology Stack</h3>
+            <ul style="margin-bottom: 0; padding-left: 18px;">
+                <li><strong>Python</strong> — Core pipeline scripting</li>
+                <li><strong>Pandas & NumPy</strong> — Data manipulation & arrays</li>
+                <li><strong>Scikit-Learn</strong> — Preprocessing & regression models</li>
+                <li><strong>Flask & HTML5/CSS</strong> — Web application framework</li>
+            </ul>
+        </div>
 
-    <ul>
-        <li>Analyze insurance claim data.</li>
-        <li>Clean and preprocess the dataset.</li>
-        <li>Handle missing values.</li>
-        <li>Encode categorical features.</li>
-        <li>Scale numerical features.</li>
-        <li>Prepare data for machine learning.</li>
-        <li>Predict insurance claim loss.</li>
-        <li>Understand factors affecting claim loss.</li>
-    </ul>
-
-    <h2>Technologies Used</h2>
-
-    <ul>
-        <li>Python</li>
-        <li>Pandas</li>
-        <li>NumPy</li>
-        <li>Scikit-learn</li>
-        <li>Matplotlib</li>
-        <li>Seaborn</li>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>Machine Learning</li>
-    </ul>
+        <div class="card">
+            <h3 style="color: var(--accent-primary); font-size: 14px; text-transform: uppercase;">Why ClaimWise?</h3>
+            <p style="margin-bottom: 0;">
+                ClaimWise demonstrates how an automated data preprocessing pipeline converts raw, high-dimensional insurance records into clean, standardized matrices ready for regression modeling.
+            </p>
+        </div>
+    </div>
 
 </div>
 

@@ -1,64 +1,154 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>ClaimWise Insurance Prediction System</h1>
-
-    <h2>Project Introduction</h2>
-
-    <p>
-        ClaimWise Insurance Prediction System is a machine
-        learning project designed to analyze insurance claim
-        data and predict claim loss.
-    </p>
-
-    <h2>Project Overview</h2>
-
-    <p>
-        The project follows a complete machine learning
-        workflow including data understanding, cleaning,
-        missing value handling, categorical encoding,
-        feature scaling and dataset preparation.
-    </p>
-
-    <h2>Key Project Statistics</h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>Dataset Records</h3>
-            <h2>50,000</h2>
+    <!-- TWO-COLUMN HERO SECTION -->
+    <div class="hero-two-col">
+        <div class="hero-left">
+            <span class="hero-label">INSURANCE • MACHINE LEARNING</span>
+            <h1>ClaimWise<br>Insurance Claim<br>Prediction System</h1>
+            <p class="hero-description">
+                A machine learning based system that analyzes customer, policy, claim and coverage information to estimate insurance claim loss.
+            </p>
+            <div class="hero-buttons">
+                <a href="/preprocessing" class="btn btn-primary">Explore Project ➔</a>
+                <a href="/prediction" class="btn btn-secondary">Try Prediction</a>
+            </div>
         </div>
 
+        <div class="hero-right">
+            <div class="hero-info-card">
+                <div class="hero-info-header">CLAIM ANALYSIS</div>
+                <div class="hero-info-list">
+                    <div class="hero-info-item">
+                        <span>Customer Domain</span>
+                        <span>Audited</span>
+                    </div>
+                    <div class="hero-info-item">
+                        <span>Policy Domain</span>
+                        <span>Audited</span>
+                    </div>
+                    <div class="hero-info-item">
+                        <span>Coverage Domain</span>
+                        <span>Audited</span>
+                    </div>
+                    <div class="hero-info-item">
+                        <span>Claim Domain</span>
+                        <span>Audited</span>
+                    </div>
+                </div>
+                <div class="hero-info-footer">
+                    <div>
+                        <span style="color: var(--text-muted);">Estimated Loss:</span>
+                        <strong style="color: var(--text-primary); margin-left: 4px;">—</strong>
+                    </div>
+                    <span class="status-badge status-ready">Ready for evaluation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOUR HORIZONTAL STATISTIC CARDS -->
+    <div class="cards cards-4">
         <div class="card">
-            <h3>Original Columns</h3>
-            <h2>132</h2>
+            <h3>Dataset Records</h3>
+            <div class="stat-value">50,000</div>
+            <p>Historical insurance records</p>
         </div>
 
         <div class="card">
             <h3>Input Features</h3>
-            <h2>130</h2>
+            <div class="stat-value">130</div>
+            <p>Predictor variables (\(X\))</p>
         </div>
 
         <div class="card">
-            <h3>Training Records</h3>
-            <h2>40,000</h2>
+            <h3>Target Variable</h3>
+            <div class="stat-value">1</div>
+            <p>Continuous target (<code>loss</code>)</p>
         </div>
 
         <div class="card">
-            <h3>Testing Records</h3>
-            <h2>10,000</h2>
+            <h3>Train / Test</h3>
+            <div class="stat-value" style="font-size: 22px;">40,000 / 10,000</div>
+            <p>80:20 partition split</p>
+        </div>
+    </div>
+
+    <!-- HOW CLAIMWISE WORKS -->
+    <h2>How ClaimWise Works</h2>
+    <p>A structured six-step workflow designed to transform raw insurance records into ML-ready features.</p>
+    
+    <div class="steps">
+        <div class="step">
+            <span class="step-number">01</span>
+            <h3>DATA</h3>
+            <p>Ingests 50,000 raw insurance claims records.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">02</span>
+            <h3>CLEAN</h3>
+            <p>Drops <code>id</code> column and handles missing values.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">03</span>
+            <h3>ENCODE</h3>
+            <p>Applies <code>LabelEncoder</code> to text categories.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">04</span>
+            <h3>SCALE</h3>
+            <p>Normalizes continuous variables via <code>StandardScaler</code>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">05</span>
+            <h3>TRAIN</h3>
+            <p>Fits regression algorithms on 40,000 training rows.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">06</span>
+            <h3>PREDICT</h3>
+            <p>Estimates continuous insurance claim loss values.</p>
+        </div>
+    </div>
+
+    <!-- INSURANCE INFORMATION CATEGORIES -->
+    <h2>Insurance Information</h2>
+    <p>Input features are grouped into four primary insurance data categories:</p>
+
+    <div class="cards">
+        <div class="card">
+            <div style="font-size: 22px; margin-bottom: 8px;">👤</div>
+            <h3 style="color: var(--text-primary); font-size: 15px;">CUSTOMER</h3>
+            <p>Customer demographic and financial information.</p>
         </div>
 
         <div class="card">
-            <h3>Missing Values</h3>
-            <h2>0</h2>
+            <div style="font-size: 22px; margin-bottom: 8px;">📄</div>
+            <h3 style="color: var(--text-primary); font-size: 15px;">POLICY</h3>
+            <p>Policy duration, premium and policy information.</p>
         </div>
 
+        <div class="card">
+            <div style="font-size: 22px; margin-bottom: 8px;">📋</div>
+            <h3 style="color: var(--text-primary); font-size: 15px;">CLAIM</h3>
+            <p>Claim and incident information.</p>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 22px; margin-bottom: 8px;">💵</div>
+            <h3 style="color: var(--text-primary); font-size: 15px;">COVERAGE</h3>
+            <p>Coverage and insurance information.</p>
+        </div>
     </div>
 
 </div>
