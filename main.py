@@ -1,4 +1,5 @@
 import os
+import sys
 import subprocess
 
 # ============================================================
@@ -21,10 +22,11 @@ def main():
     print(" - Static/ & templates/  : Web dashboard interface")
     print("=" * 70)
 
-    pipeline_script = "claimwise_preprocessing_pipeline.py"
-    if os.path.exists(pipeline_script):
+    pipeline_script = os.path.join(os.path.dirname(__file__), "Src", "claimwise_preprocessing_pipeline.py")
+    if os.path.exists(pipeline_script):  # Fixed: now uses absolute Src path
         print(f"\nRunning main preprocessing pipeline: {pipeline_script}...\n")
-        subprocess.run(["python3", pipeline_script])
+        # Use same python executable (works with venv) instead of hardcoded python3
+        subprocess.run([sys.executable, pipeline_script])
     else:
         print(f"Error: {pipeline_script} not found.")
 

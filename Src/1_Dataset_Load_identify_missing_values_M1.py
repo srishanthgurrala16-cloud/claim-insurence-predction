@@ -8,11 +8,11 @@ import seaborn as sns
 # ============================================
 # Project: ClaimWise Insurance Prediction
 # Module 1: Dataset Exploration and Initial Audit
-# Reads: claimwise_50000.csv
+# Reads: 01_raw_claimwise_50000.csv
 # ============================================
 
-BASE_DIR = "/Users/padaltiruvinayak/Desktop/Credit ML"
-DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "claimwise_50000.csv")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Project root: Credit ML
+DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "01_raw_claimwise_50000.csv")
 
 if not os.path.exists(DATASET_PATH):
     print("Dataset file not found at:")
@@ -23,7 +23,7 @@ print("Dataset file found successfully:")
 print(DATASET_PATH)
 
 print("=" * 70)
-print("1. LOAD DATASET (claimwise_50000.csv)")
+print("1. LOAD DATASET (01_raw_claimwise_50000.csv)")
 print("=" * 70)
 
 try:
