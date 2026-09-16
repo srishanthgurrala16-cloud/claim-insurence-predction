@@ -12,86 +12,64 @@
         <p>Benchmark suite of regression algorithms for predicting continuous insurance claim loss.</p>
     </div>
 
-    <!-- TASK SPECIFICATION -->
     <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 28px;">
         <div class="card">
             <h3>Machine Learning Task</h3>
             <div class="stat-value" style="font-size: 24px; color: var(--text-primary);">Regression</div>
             <p>Predicting real-valued continuous claim loss outputs</p>
         </div>
-
         <div class="card">
             <h3>Target Variable</h3>
             <div class="stat-value" style="font-size: 24px; color: var(--accent-primary);">loss</div>
-            <p>Continuous target vector (\(y\))</p>
+            <p>Continuous target vector (y)</p>
         </div>
     </div>
 
-    <!-- MODEL CARDS GRID -->
-    <h2>Regression Architecture Suite</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-        <div class="card">
-            <h3 style="color: var(--text-primary); font-size: 17px;">Linear Regression</h3>
-            <p style="margin-bottom: 14px;">Baseline regression model establishing linear feature-target relationships.</p>
-            <div style="display: flex; gap: 14px; font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
-                <span>RMSE: <strong>—</strong></span>
-                <span>MAE: <strong>—</strong></span>
-                <span>R²: <strong>—</strong></span>
-            </div>
-            <span class="status-badge status-pending">Evaluation pending</span>
-        </div>
-
-        <div class="card">
-            <h3 style="color: var(--text-primary); font-size: 17px;">Random Forest</h3>
-            <p style="margin-bottom: 14px;">Tree-based ensemble regression model capturing non-linear interactions.</p>
-            <div style="display: flex; gap: 14px; font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
-                <span>RMSE: <strong>—</strong></span>
-                <span>MAE: <strong>—</strong></span>
-                <span>R²: <strong>—</strong></span>
-            </div>
-            <span class="status-badge status-pending">Evaluation pending</span>
-        </div>
-
-        <div class="card">
-            <h3 style="color: var(--text-primary); font-size: 17px;">Ridge Regression</h3>
-            <p style="margin-bottom: 14px;">L2 regularized regression model to control multicollinearity penalties.</p>
-            <div style="display: flex; gap: 14px; font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
-                <span>RMSE: <strong>—</strong></span>
-                <span>MAE: <strong>—</strong></span>
-                <span>R²: <strong>—</strong></span>
-            </div>
-            <span class="status-badge status-pending">Evaluation pending</span>
-        </div>
-
-        <div class="card">
-            <h3 style="color: var(--text-primary); font-size: 17px;">Lasso Regression</h3>
-            <p style="margin-bottom: 14px;">L1 regularized regression model for feature coefficient shrinkage.</p>
-            <div style="display: flex; gap: 14px; font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
-                <span>RMSE: <strong>—</strong></span>
-                <span>MAE: <strong>—</strong></span>
-                <span>R²: <strong>—</strong></span>
-            </div>
-            <span class="status-badge status-pending">Evaluation pending</span>
-        </div>
-
-        <div class="card">
-            <h3 style="color: var(--text-primary); font-size: 17px;">Elastic Net</h3>
-            <p style="margin-bottom: 14px;">Combined L1 and L2 regularized regression balancing feature selection.</p>
-            <div style="display: flex; gap: 14px; font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
-                <span>RMSE: <strong>—</strong></span>
-                <span>MAE: <strong>—</strong></span>
-                <span>R²: <strong>—</strong></span>
-            </div>
-            <span class="status-badge status-pending">Evaluation pending</span>
-        </div>
+    <h2>Actual Test-Set Results</h2>
+    {% if model_ready %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>MAE</th>
+                    <th>MSE</th>
+                    <th>RMSE</th>
+                    <th>R²</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in model_rows %}
+                <tr {% if row['Model'] == best_name %}style="border-left: 4px solid var(--success);"{% endif %}>
+                    <td><strong>{{ row['Model'] }}</strong></td>
+                    <td>{{ '%.2f'|format(row['MAE']) }}</td>
+                    <td>{{ '%.2f'|format(row['MSE']) }}</td>
+                    <td>{{ '%.2f'|format(row['RMSE']) }}</td>
+                    <td>{{ '%.4f'|format(row['R2']) }}</td>
+                    <td>
+                        {% if row['Model'] == best_name %}
+                        <span class="status-badge status-ready">Best model</span>
+                        {% else %}
+                        <span class="status-badge status-completed">Evaluated</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-    <!-- EVALUATION NOTE -->
     <div class="info-box" style="margin-top: 30px;">
         <p>
-            <strong>Evaluation Standard:</strong> Models will be evaluated on the 10,000 test records using Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and Coefficient of Determination (\(R^2\)) after model fitting.
+            <strong>Selected model:</strong> {{ best_name }}. Selection uses the lowest test-set RMSE, with MAE, MSE, and then higher R² as deterministic tie-breakers. Metrics are generated from the actual 10,000 test records.
         </p>
     </div>
+    {% else %}
+    <div class="info-box">
+        <p><strong>Model evaluation is not available yet.</strong> Run <code>Src/train_models.py</code> to train the four regression models and generate the real comparison metrics.</p>
+    </div>
+    {% endif %}
 
 </div>
 

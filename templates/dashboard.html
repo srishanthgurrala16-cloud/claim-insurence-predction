@@ -9,65 +9,80 @@
     <div class="page-header">
         <span class="page-label">PROJECT DASHBOARD</span>
         <h1>CLAIMWISE PROJECT STATUS</h1>
-        <p>Minimal project status overview tracking system pipeline components and dataset readiness.</p>
+        <p>Project status and real regression performance from the prepared ClaimWise dataset.</p>
     </div>
 
-    <!-- COMPACT STATUS CARDS GRID -->
-    <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+    <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
         <div class="card">
-            <h3>Dataset</h3>
+            <h3>Total Records</h3>
             <div class="stat-value">50,000</div>
-            <p>records</p>
-            <div style="margin-top: 12px;">
-                <span class="status-badge status-ready">READY</span>
-            </div>
+            <p>prepared insurance records</p>
+            <div style="margin-top: 12px;"><span class="status-badge status-ready">READY</span></div>
         </div>
-
         <div class="card">
-            <h3>Preprocessing</h3>
-            <div class="stat-value" style="font-size: 22px;">Completed</div>
-            <p>0 missing / duplicates</p>
-            <div style="margin-top: 12px;">
-                <span class="status-badge status-ready">READY</span>
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>Features</h3>
+            <h3>Input Features</h3>
             <div class="stat-value">130</div>
-            <p>input predictors (\(X\))</p>
-            <div style="margin-top: 12px;">
-                <span class="status-badge status-ready">READY</span>
-            </div>
+            <p>actual predictors in X</p>
+            <div style="margin-top: 12px;"><span class="status-badge status-ready">READY</span></div>
         </div>
-
         <div class="card">
-            <h3>Target</h3>
-            <div class="stat-value" style="font-size: 24px; color: var(--accent-primary);">loss</div>
-            <p>continuous target (\(y\))</p>
-            <div style="margin-top: 12px;">
-                <span class="status-badge status-ready">READY</span>
-            </div>
+            <h3>Training Records</h3>
+            <div class="stat-value">40,000</div>
+            <p>records used for fitting</p>
+            <div style="margin-top: 12px;"><span class="status-badge status-ready">READY</span></div>
         </div>
-
         <div class="card">
-            <h3>Train / Test</h3>
-            <div class="stat-value" style="font-size: 20px;">40,000 / 10,000</div>
-            <p>80:20 partition</p>
-            <div style="margin-top: 12px;">
-                <span class="status-badge status-ready">READY</span>
-            </div>
+            <h3>Testing Records</h3>
+            <div class="stat-value">10,000</div>
+            <p>records used for evaluation</p>
+            <div style="margin-top: 12px;"><span class="status-badge status-ready">READY</span></div>
         </div>
-
         <div class="card">
-            <h3>Model</h3>
-            <div class="stat-value" style="font-size: 22px;">Regression</div>
-            <p>benchmark suite</p>
-            <div style="margin-top: 12px;">
-                <span class="status-badge status-ready">READY</span>
-            </div>
+            <h3>Missing Values</h3>
+            <div class="stat-value" style="color: var(--success);">0</div>
+            <p>after preprocessing</p>
+            <div style="margin-top: 12px;"><span class="status-badge status-ready">VERIFIED</span></div>
+        </div>
+        <div class="card">
+            <h3>Duplicate Records</h3>
+            <div class="stat-value" style="color: var(--success);">0</div>
+            <p>after preprocessing</p>
+            <div style="margin-top: 12px;"><span class="status-badge status-ready">VERIFIED</span></div>
         </div>
     </div>
+
+    <h2>Best Regression Model</h2>
+    {% if model_ready %}
+    <div class="info-box">
+        <p><strong>{{ best_name }}</strong> is the current best model based on the lowest actual test-set RMSE.</p>
+    </div>
+    <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div class="card">
+            <h3>MAE</h3>
+            <div class="stat-value">{{ '%.2f'|format(best_metrics['MAE']) }}</div>
+            <p>mean absolute error</p>
+        </div>
+        <div class="card">
+            <h3>MSE</h3>
+            <div class="stat-value">{{ '%.2f'|format(best_metrics['MSE']) }}</div>
+            <p>mean squared error</p>
+        </div>
+        <div class="card">
+            <h3>RMSE</h3>
+            <div class="stat-value">{{ '%.2f'|format(best_metrics['RMSE']) }}</div>
+            <p>root mean squared error</p>
+        </div>
+        <div class="card">
+            <h3>R²</h3>
+            <div class="stat-value">{{ '%.4f'|format(best_metrics['R2']) }}</div>
+            <p>coefficient of determination</p>
+        </div>
+    </div>
+    {% else %}
+    <div class="info-box">
+        <p><strong>Model stage pending.</strong> Run <code>Src/train_models.py</code> to train the four regression models and populate this dashboard with actual metrics.</p>
+    </div>
+    {% endif %}
 
 </div>
 
