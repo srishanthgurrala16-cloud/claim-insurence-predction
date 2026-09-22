@@ -1,34 +1,74 @@
 {% extends "base.html" %}
 
-{% block title %}Reports{% endblock %}
+{% block title %}Reports | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>ClaimWise Reports</h1>
+    <div class="page-header">
+        <span class="page-label">PROJECT DOCUMENTATION</span>
+        <h1>ClaimWise Project Reports</h1>
+        <p>Dataset summary, preprocessing status, and actual regression evaluation results.</p>
+    </div>
 
     <h2>Dataset Summary</h2>
-
-    <ul>
-        <li>Original Rows: 50,000</li>
-        <li>Final Rows: 50,000</li>
-        <li>Original Columns: 132</li>
-        <li>Final Columns: 131</li>
-        <li>Training Rows: 40,000</li>
-        <li>Testing Rows: 10,000</li>
-        <li>Missing Values: 0</li>
-        <li>Duplicate Rows: 0</li>
-        <li>Target Column: loss</li>
-        <li>Removed Column: id</li>
-        <li>Input Features: 130</li>
-    </ul>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr><th>Report Parameter</th><th>Actual Value</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Dataset</strong></td><td>ClaimWise Insurance Claim Dataset</td></tr>
+                <tr><td><strong>Total records</strong></td><td>50,000</td></tr>
+                <tr><td><strong>Original columns</strong></td><td>132</td></tr>
+                <tr><td><strong>Final columns</strong></td><td>131</td></tr>
+                <tr><td><strong>Input features</strong></td><td>130</td></tr>
+                <tr><td><strong>Removed column</strong></td><td><code>id</code></td></tr>
+                <tr><td><strong>Target</strong></td><td><code>loss</code> (regression)</td></tr>
+                <tr><td><strong>Training / testing</strong></td><td>40,000 / 10,000</td></tr>
+            </tbody>
+        </table>
+    </div>
 
     <h2>Preprocessing Summary</h2>
+    <div class="info-box">
+        <p>Existing preprocessing was kept unchanged for model integration. The saved training and test files contain 130 numeric feature columns, the target file contains <code>loss</code>, and the supplied data has 0 missing values and 0 duplicate records after preprocessing.</p>
+    </div>
 
-    <p>
-        Preprocessing completed successfully. Data is cleaned, imputed, label-encoded, and scaled for ML model evaluation.
-    </p>
+    <h2>Model Comparison</h2>
+    {% if model_ready %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr><th>Model</th><th>MAE</th><th>MSE</th><th>RMSE</th><th>R²</th></tr>
+            </thead>
+            <tbody>
+                {% for row in model_rows %}
+                <tr {% if row['Model'] == best_name %}style="border-left: 4px solid var(--success);"{% endif %}>
+                    <td><strong>{{ row['Model'] }}</strong>{% if row['Model'] == best_name %} <span class="status-badge status-ready">Best</span>{% endif %}</td>
+                    <td>{{ '%.2f'|format(row['MAE']) }}</td>
+                    <td>{{ '%.2f'|format(row['MSE']) }}</td>
+                    <td>{{ '%.2f'|format(row['RMSE']) }}</td>
+                    <td>{{ '%.4f'|format(row['R2']) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="info-box">
+        <p><strong>Best model:</strong> {{ best_name }}. It was selected from the actual comparison CSV by lowest RMSE, followed by MAE, MSE, and higher R² as tie-breakers.</p>
+    </div>
+    {% else %}
+    <div class="info-box">
+        <p><strong>Model comparison is pending.</strong> Run <code>Src/train_models.py</code> to generate the real evaluation report.</p>
+    </div>
+    {% endif %}
+
+    <h2>Final Project Status</h2>
+    <div class="info-box">
+        <p><strong>Dataset → preprocessing → EDA → regression model training → evaluation → Flask integration.</strong> {% if model_ready %}The model development stage is complete and the best model is available for the test-row prediction page.{% else %}The existing data preparation is complete; model training is the remaining step.{% endif %}</p>
+    </div>
 
 </div>
 

@@ -1,23 +1,63 @@
 # ClaimWise Insurance Prediction
 
+A machine learning-based insurance analytics system for predicting insurance claim loss using customer, policy, claim, coverage, and other insurance-related information.
+
+---
+
 ## 📌 Project Overview
 
-**ClaimWise Insurance Prediction** is a Machine Learning project that analyzes historical insurance claim data and prepares it for predicting insurance claim loss.
+**ClaimWise Insurance Prediction** is a machine learning project developed to analyze insurance-related data and prepare it for predicting insurance claim loss.
 
-The project focuses on understanding, cleaning, preprocessing, encoding, scaling, and preparing insurance data for Machine Learning models.
+The project follows a structured machine learning workflow that includes data understanding, data cleaning, preprocessing, feature preparation, exploratory data analysis, train-test splitting, model development, model evaluation, and web application integration.
+
+The system works with insurance-related information such as customer details, policy information, claim information, coverage details, and other relevant attributes.
+
+The primary prediction target of the project is the **`loss`** variable.
 
 ---
 
 ## 🎯 Objectives
 
-- Analyze insurance claim data.
-- Handle missing values.
+The main objectives of ClaimWise Insurance Prediction are:
+
+- Analyze insurance-related data.
+- Understand the structure and characteristics of the dataset.
+- Identify and handle missing values.
 - Remove duplicate records.
-- Encode categorical features.
-- Scale numerical features.
-- Prepare features for Machine Learning.
-- Split the dataset into training and testing data.
-- Predict insurance claim loss using Machine Learning.
+- Encode categorical variables.
+- Scale and normalize numerical features.
+- Prepare clean and consistent data for machine learning.
+- Separate input features from the target variable.
+- Split the dataset into training and testing datasets.
+- Perform exploratory data analysis.
+- Develop suitable regression models.
+- Evaluate and compare model performance.
+- Provide a professional web-based interface.
+- Integrate the trained machine learning model for future real-time prediction.
+
+---
+
+## 🧠 Machine Learning Problem
+
+### Problem Type
+
+**Regression**
+
+### Target Variable
+
+`loss`
+
+The target variable `loss` represents the insurance claim loss that the machine learning system is designed to predict.
+
+### Input Features
+
+After preprocessing, the dataset contains:
+
+- **130 input features**
+- **1 target variable**
+- **Target:** `loss`
+
+The `id` column is removed because it is an identifier and does not provide meaningful predictive information.
 
 # claim-insurence-predction
 
@@ -25,44 +65,53 @@ The project focuses on understanding, cleaning, preprocessing, encoding, scaling
 
 ## 📊 Dataset Information
 
-The project uses a dataset containing **50,000 insurance records**.
+The project uses an insurance dataset containing **50,000 records** with **132 original columns**.
 
-| Information | Value |
+| Dataset Property | Value |
 |---|---:|
 | Total Records | 50,000 |
 | Original Columns | 132 |
+| Final Records | 50,000 |
 | Final Columns | 131 |
-| Removed Column | `id` |
 | Input Features | 130 |
+| Target Variable | `loss` |
+| Removed Column | `id` |
 | Training Records | 40,000 |
 | Testing Records | 10,000 |
-| Missing Values | 0 |
-| Duplicate Records | 0 |
-| Target Variable | `loss` |
+| Missing Values After Preprocessing | 0 |
+| Duplicate Records After Preprocessing | 0 |
 
 ---
 
-## 🔄 Preprocessing Pipeline
-
-The preprocessing workflow follows these steps:
+## 🔄 Machine Learning Workflow
 
 ```text
-Raw Dataset
-     ↓
-Dataset Loading
-     ↓
+Raw Insurance Dataset
+        ↓
 Data Understanding
-     ↓
-Missing Value Handling
-     ↓
+        ↓
+Data Cleaning
+        ↓
 Duplicate Removal
-     ↓
-Categorical Encoding
-     ↓
+        ↓
+Missing Value Handling
+        ↓
+Categorical Feature Encoding
+        ↓
 Feature Scaling
-     ↓
+        ↓
+Feature Normalization
+        ↓
 Feature / Target Separation
-     ↓
+        ↓
 Train-Test Split
-     ↓
-Preprocessed Dataset
+        ↓
+Exploratory Data Analysis
+        ↓
+Model Training
+        ↓
+Model Evaluation
+        ↓
+Claim Loss Prediction
+        ↓
+Web Application

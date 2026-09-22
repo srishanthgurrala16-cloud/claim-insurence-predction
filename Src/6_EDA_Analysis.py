@@ -6,11 +6,11 @@ import numpy as np
 
 # ============================================================
 # CLAIMWISE INSURANCE PREDICTION — EDA & VISUALIZATION
-# Reads preprocessed dataset: claimwise_preprocessed.csv
+# Reads preprocessed dataset: 05_preprocessed_final.csv
 # ============================================================
 
-BASE_DIR = "/Users/padaltiruvinayak/Desktop/Credit ML"
-DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "claimwise_preprocessed.csv")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Project root: Credit ML
+DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "05_preprocessed_final.csv")
 OUTPUT_FOLDER = os.path.join(BASE_DIR, "Outputs", "EDA_Analysis_outputs")
 
 # Verify preprocessed dataset file exists

@@ -5,20 +5,20 @@ from sklearn.model_selection import train_test_split
 # ============================================
 # CLAIMWISE INSURANCE PREDICTION — STEP 5
 # FINAL PREPROCESSING & TRAIN-TEST SPLIT
-# Reads : clean_minmax_stand_norma_M2.csv
-# Saves : claimwise_preprocessed.csv
-#         X_train.csv, X_test.csv
-#         y_train.csv, y_test.csv
+# Reads : 04_scaled_standardized.csv
+# Saves : 05_preprocessed_final.csv
+#         06_split_X_train.csv, 06_split_X_test.csv
+#         06_split_y_train.csv, 06_split_y_test.csv
 # ============================================
 
-BASE_DIR = "/Users/padaltiruvinayak/Desktop/Credit ML"
-INPUT_FILE = os.path.join(BASE_DIR, "Dataset", "clean_minmax_stand_norma_M2.csv")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Project root: Credit ML
+INPUT_FILE = os.path.join(BASE_DIR, "Dataset", "04_scaled_standardized.csv")
 
-PREPROCESSED_DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "claimwise_preprocessed.csv")
-X_TRAIN_PATH = os.path.join(BASE_DIR, "Dataset", "X_train.csv")
-X_TEST_PATH = os.path.join(BASE_DIR, "Dataset", "X_test.csv")
-Y_TRAIN_PATH = os.path.join(BASE_DIR, "Dataset", "y_train.csv")
-Y_TEST_PATH = os.path.join(BASE_DIR, "Dataset", "y_test.csv")
+PREPROCESSED_DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "05_preprocessed_final.csv")
+X_TRAIN_PATH = os.path.join(BASE_DIR, "Dataset", "06_split_X_train.csv")
+X_TEST_PATH = os.path.join(BASE_DIR, "Dataset", "06_split_X_test.csv")
+Y_TRAIN_PATH = os.path.join(BASE_DIR, "Dataset", "06_split_y_train.csv")
+Y_TEST_PATH = os.path.join(BASE_DIR, "Dataset", "06_split_y_test.csv")
 
 if not os.path.exists(INPUT_FILE):
     print("Input dataset file not found at:")

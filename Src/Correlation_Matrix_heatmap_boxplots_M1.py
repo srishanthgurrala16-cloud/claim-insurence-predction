@@ -8,12 +8,12 @@ import numpy as np
 # CLAIMWISE INSURANCE PREDICTION
 # CORRELATION MATRIX, HEATMAP, AND INDIVIDUAL BOXPLOTS
 # Module: Correlation_Matrix_heatmap_boxplots_M1.py
-# Reads preprocessed dataset: claimwise_preprocessed.csv
+# Reads preprocessed dataset: 05_preprocessed_final.csv
 # Output Folder: Outputs/Boxplots_correlation/
 # ============================================================
 
-BASE_DIR = "/Users/padaltiruvinayak/Desktop/Credit ML"
-DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "claimwise_preprocessed.csv")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Project root: Credit ML
+DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "05_preprocessed_final.csv")
 BOXPLOT_OUTPUT_FOLDER = os.path.join(BASE_DIR, "Outputs", "Boxplots_correlation")
 
 # Verify preprocessed dataset file exists

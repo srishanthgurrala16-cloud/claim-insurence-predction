@@ -1,19 +1,59 @@
 {% extends "base.html" %}
 
-{% block title %}Visualization{% endblock %}
+{% block title %}Visualization | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>ClaimWise Data Visualization</h1>
+    <div class="page-header">
+        <span class="page-label">EXPLORATORY DATA ANALYSIS</span>
+        <h1>Analysis Areas</h1>
+        <p>Overview of the exploratory data analysis domains used in the machine learning workflow.</p>
+    </div>
 
-    <p>
-        Data visualization and exploratory analysis outputs will be displayed here.
-    </p>
+    <!-- ANALYSIS AREAS CARDS -->
+    <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div class="card">
+            <h2 style="margin-top: 0; color: var(--accent-primary); font-size: 16px;">DATA DISTRIBUTION</h2>
+            <p>
+                Used to analyze frequency histograms, skewness, and variance across continuous features (cont1 to cont14) and categorical variables (cat1 to cat116) to verify data normality and scaling requirements.
+            </p>
+        </div>
 
-    <div class="chart-placeholder">
-        ClaimWise visualizations placeholder
+        <div class="card">
+            <h2 style="margin-top: 0; color: var(--accent-primary); font-size: 16px;">FEATURE RELATIONSHIPS</h2>
+            <p>
+                Used to evaluate pairwise feature correlation matrices, detect multicollinearity among continuous predictors, and identify high-leverage feature interaction pairs.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2 style="margin-top: 0; color: var(--accent-primary); font-size: 16px;">CATEGORICAL ANALYSIS</h2>
+            <p>
+                Used to inspect high-cardinality categorical feature distributions, frequency encoding boundaries, and variance across policy, claim, and customer risk categories.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2 style="margin-top: 0; color: var(--accent-primary); font-size: 16px;">TARGET VARIABLE</h2>
+            <p>
+                Used to examine the target variable <code>loss</code>, its probability density distribution, logarithmic transformations, and extreme loss tail characteristics.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2 style="margin-top: 0; color: var(--accent-primary); font-size: 16px;">MODEL PERFORMANCE</h2>
+            <p>
+                Used to evaluate post-training regression outputs through residual scatter plots, predicted vs. actual claim loss comparisons, and error metric distributions.
+            </p>
+        </div>
+    </div>
+
+    <div class="info-box" style="margin-top: 28px;">
+        <p>
+            <strong>Analytical Role:</strong> Exploratory visualization is an essential diagnostic stage in the machine learning workflow. It enables data scientists to validate data quality prior to regression model training.
+        </p>
     </div>
 
 </div>

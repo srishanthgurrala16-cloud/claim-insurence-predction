@@ -1,66 +1,123 @@
 {% extends "base.html" %}
 
-{% block title %}Dataset{% endblock %}
+{% block title %}Dataset | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>ClaimWise Dataset</h1>
+    <div class="page-header">
+        <span class="page-label">CLAIMWISE DATASET</span>
+        <h1>Understanding the data behind the prediction system.</h1>
+        <p>Summary of structural dimensions, schema modifications, and feature domain partitioning.</p>
+    </div>
 
-    <table>
-        <tr>
-            <th>Property</th>
-            <th>Value</th>
-        </tr>
-        <tr>
-            <td>Dataset Records</td>
-            <td>50,000</td>
-        </tr>
-        <tr>
-            <td>Original Columns</td>
-            <td>132</td>
-        </tr>
-        <tr>
-            <td>Final Columns</td>
-            <td>131</td>
-        </tr>
-        <tr>
-            <td>Input Features</td>
-            <td>130</td>
-        </tr>
-        <tr>
-            <td>Training Records</td>
-            <td>40,000</td>
-        </tr>
-        <tr>
-            <td>Testing Records</td>
-            <td>10,000</td>
-        </tr>
-        <tr>
-            <td>Missing Values</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>Duplicate Records</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>Target Column</td>
-            <td>loss</td>
-        </tr>
-        <tr>
-            <td>Removed Column</td>
-            <td>id</td>
-        </tr>
-    </table>
+    <!-- DATASET STATS GRID -->
+    <div class="cards cards-4">
+        <div class="card">
+            <h3>Dataset Records</h3>
+            <div class="stat-value">50,000</div>
+            <p>Insurance claims</p>
+        </div>
+        <div class="card">
+            <h3>Original Columns</h3>
+            <div class="stat-value">132</div>
+            <p>Initial schema</p>
+        </div>
+        <div class="card">
+            <h3>Final Columns</h3>
+            <div class="stat-value">131</div>
+            <p>Post-cleaning schema</p>
+        </div>
+        <div class="card">
+            <h3>Input Features</h3>
+            <div class="stat-value">130</div>
+            <p>Predictor variables (\(X\))</p>
+        </div>
+    </div>
 
-    <h2>Dataset Processing</h2>
+    <!-- SPECIFICATIONS TABLE -->
+    <h2>Dataset Specifications</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Specification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Total Records</strong></td>
+                    <td>50,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Original Columns</strong></td>
+                    <td>132</td>
+                </tr>
+                <tr>
+                    <td><strong>Final Columns</strong></td>
+                    <td>131</td>
+                </tr>
+                <tr>
+                    <td><strong>Input Features</strong></td>
+                    <td>130</td>
+                </tr>
+                <tr>
+                    <td><strong>Target Column</strong></td>
+                    <td><code>loss</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Removed Column</strong></td>
+                    <td><code>id</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Training Records</strong></td>
+                    <td>40,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Testing Records</strong></td>
+                    <td>10,000</td>
+                </tr>
+                <tr>
+                    <td><strong>Missing Values</strong></td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td><strong>Duplicates</strong></td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <p>
-        The ClaimWise dataset contains 50,000 insurance claim records used for preprocessing and machine learning analysis.
-        The data undergoes missing value imputation, label encoding of categorical features, and standard scaling of continuous numerical variables prior to model training.
-    </p>
+    <!-- FEATURE GROUPS -->
+    <h2>FEATURE GROUPS</h2>
+    <div class="cards">
+        <div class="card">
+            <div style="font-size: 20px; margin-bottom: 6px;">👤</div>
+            <h3>Customer Information</h3>
+            <p>Demographic characteristics and customer historical risk metrics.</p>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 20px; margin-bottom: 6px;">📄</div>
+            <h3>Policy Information</h3>
+            <p>Policy term durations, premium details, and coverage categories.</p>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 20px; margin-bottom: 6px;">📋</div>
+            <h3>Claim Information</h3>
+            <p>Incident parameters, claim types, and historical claim occurrences.</p>
+        </div>
+
+        <div class="card">
+            <div style="font-size: 20px; margin-bottom: 6px;">💵</div>
+            <h3>Coverage Information</h3>
+            <p>Financial coverage amounts, deductibles, and liability limits.</p>
+        </div>
+    </div>
 
 </div>
 

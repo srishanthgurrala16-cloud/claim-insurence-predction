@@ -10,29 +10,29 @@ from sklearn.model_selection import train_test_split
 # CLAIMWISE INSURANCE PREDICTION — MASTER PREPROCESSING PIPELINE
 # ============================================================
 # Sequential Intermediate Dataset Flow:
-# 1. claimwise_50000.csv
+# 1. 01_raw_claimwise_50000.csv
 #    ↓
-# 2. clean_del_median_model_M2.csv
+# 2. 02_cleaned_dedup_median_imputed.csv
 #    ↓
-# 3. clean_label_encode_M2.csv
+# 3. 03_encoded_label.csv
 #    ↓
-# 4. clean_minmax_stand_norma_M2.csv
+# 4. 04_scaled_standardized.csv
 #    ↓
-# 5. claimwise_preprocessed.csv + X_train, X_test, y_train, y_test
+# 5. 05_preprocessed_final.csv + X_train, X_test, y_train, y_test
 # ============================================================
 
-BASE_DIR = "/"
-DATASET_PATH = os.path.join(BASE_DIR, "../Dataset", "claimwise_50000.csv")
-STEP2_PATH = os.path.join(BASE_DIR, "../Dataset", "clean_del_median_model_M2.csv")
-STEP3_PATH = os.path.join(BASE_DIR, "../Dataset", "clean_label_encode_M2.csv")
-STEP4_PATH = os.path.join(BASE_DIR, "../Dataset", "clean_minmax_stand_norma_M2.csv")
-PREPROCESSED_DATASET_PATH = os.path.join(BASE_DIR, "../Dataset", "claimwise_preprocessed.csv")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Fixed: was "/" causing Read-only error
+DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "01_raw_claimwise_50000.csv")
+STEP2_PATH = os.path.join(BASE_DIR, "Dataset", "02_cleaned_dedup_median_imputed.csv")
+STEP3_PATH = os.path.join(BASE_DIR, "Dataset", "03_encoded_label.csv")
+STEP4_PATH = os.path.join(BASE_DIR, "Dataset", "04_scaled_standardized.csv")
+PREPROCESSED_DATASET_PATH = os.path.join(BASE_DIR, "Dataset", "05_preprocessed_final.csv")
 
-X_TRAIN_PATH = os.path.join(BASE_DIR, "../Dataset", "X_train.csv")
-X_TEST_PATH = os.path.join(BASE_DIR, "../Dataset", "X_test.csv")
-Y_TRAIN_PATH = os.path.join(BASE_DIR, "../Dataset", "y_train.csv")
-Y_TEST_PATH = os.path.join(BASE_DIR, "../Dataset", "y_test.csv")
-OUTPUT_FOLDER = os.path.join(BASE_DIR, "../Outputs", "EDA_Analysis_outputs")
+X_TRAIN_PATH = os.path.join(BASE_DIR, "Dataset", "06_split_X_train.csv")
+X_TEST_PATH = os.path.join(BASE_DIR, "Dataset", "06_split_X_test.csv")
+Y_TRAIN_PATH = os.path.join(BASE_DIR, "Dataset", "06_split_y_train.csv")
+Y_TEST_PATH = os.path.join(BASE_DIR, "Dataset", "06_split_y_test.csv")
+OUTPUT_FOLDER = os.path.join(BASE_DIR, "Outputs", "EDA_Analysis_outputs")
 
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 sns.set_theme(style="whitegrid")
@@ -44,16 +44,16 @@ if not os.path.exists(DATASET_PATH):
     raise FileNotFoundError(DATASET_PATH)
 
 print("=" * 75)
-print("1. STEP 1: LOAD DATASET AND AUDIT (claimwise_50000.csv)")
+print("1. STEP 1: LOAD DATASET AND AUDIT (01_raw_claimwise_50000.csv)")
 print("=" * 75)
 df = pd.read_csv(DATASET_PATH)
 print("Original Dataset Shape:", df.shape)
 
 # ============================================================
-# Step 2: Cleaning, Imputation & Dropping ID -> clean_del_median_model_M2.csv
+# Step 2: Cleaning, Imputation & Dropping ID -> 02_cleaned_dedup_median_imputed.csv
 # ============================================================
 print("\n" + "=" * 75)
-print("2. STEP 2: CLEANING & IMPUTATION -> clean_del_median_model_M2.csv")
+print("2. STEP 2: CLEANING & IMPUTATION -> 02_cleaned_dedup_median_imputed.csv")
 print("=" * 75)
 
 df_clean = df.copy()
@@ -70,7 +70,7 @@ for col in numeric_cols:
 # Strip whitespace and impute categorical features with mode
 cat_cols = df_clean.select_dtypes(exclude=np.number).columns.tolist()
 for col in cat_cols:
-    df_clean[col] = df_clean[col].astype(str).str.strip()
+    df_clean[col] = df_clean[col].apply(lambda x: x.strip() if isinstance(x, str) else x)  # Fixed: preserve NaN
     if df_clean[col].isnull().any():
         df_clean[col] = df_clean[col].fillna(df_clean[col].mode()[0])
 
@@ -84,10 +84,10 @@ df_clean.to_csv(STEP2_PATH, index=False)
 print("Saved Step 2 dataset:", STEP2_PATH)
 
 # ============================================================
-# Step 3: Label Encoding -> clean_label_encode_M2.csv
+# Step 3: Label Encoding -> 03_encoded_label.csv
 # ============================================================
 print("\n" + "=" * 75)
-print("3. STEP 3: CATEGORICAL LABEL ENCODING -> clean_label_encode_M2.csv")
+print("3. STEP 3: CATEGORICAL LABEL ENCODING -> 03_encoded_label.csv")
 print("=" * 75)
 
 df_step2 = pd.read_csv(STEP2_PATH)
@@ -104,10 +104,10 @@ df_step3.to_csv(STEP3_PATH, index=False)
 print("Saved Step 3 dataset:", STEP3_PATH)
 
 # ============================================================
-# Step 4: Feature Scaling -> clean_minmax_stand_norma_M2.csv
+# Step 4: Feature Scaling -> 04_scaled_standardized.csv
 # ============================================================
 print("\n" + "=" * 75)
-print("4. STEP 4: FEATURE SCALING -> clean_minmax_stand_norma_M2.csv")
+print("4. STEP 4: FEATURE SCALING -> 04_scaled_standardized.csv")
 print("=" * 75)
 
 df_step3_read = pd.read_csv(STEP3_PATH)
@@ -121,10 +121,10 @@ df_step4.to_csv(STEP4_PATH, index=False)
 print("Saved Step 4 dataset:", STEP4_PATH)
 
 # ============================================================
-# Step 5: Final Preprocessing & Train-Test Split -> claimwise_preprocessed.csv
+# Step 5: Final Preprocessing & Train-Test Split -> 05_preprocessed_final.csv
 # ============================================================
 print("\n" + "=" * 75)
-print("5. STEP 5: FINAL DATASET & SPLITTING -> claimwise_preprocessed.csv")
+print("5. STEP 5: FINAL DATASET & SPLITTING -> 05_preprocessed_final.csv")
 print("=" * 75)
 
 df_final = pd.read_csv(STEP4_PATH)

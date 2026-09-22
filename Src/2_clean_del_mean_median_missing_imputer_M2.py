@@ -5,13 +5,13 @@ import numpy as np
 # ============================================================
 # CLAIMWISE INSURANCE PREDICTION — STEP 2
 # MISSING VALUES & DUPLICATES CLEANING
-# Reads : claimwise_50000.csv
-# Saves : clean_del_median_model_M2.csv
+# Reads : 01_raw_claimwise_50000.csv
+# Saves : 02_cleaned_dedup_median_imputed.csv
 # ============================================================
 
-BASE_DIR = "/Users/padaltiruvinayak/Desktop/Credit ML"
-INPUT_FILE = os.path.join(BASE_DIR, "Dataset", "claimwise_50000.csv")
-OUTPUT_FILE = os.path.join(BASE_DIR, "Dataset", "clean_del_median_model_M2.csv")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Project root: Credit ML
+INPUT_FILE = os.path.join(BASE_DIR, "Dataset", "01_raw_claimwise_50000.csv")
+OUTPUT_FILE = os.path.join(BASE_DIR, "Dataset", "02_cleaned_dedup_median_imputed.csv")
 
 if not os.path.exists(INPUT_FILE):
     print("Input dataset file not found at:")
@@ -24,7 +24,7 @@ print(INPUT_FILE)
 df = pd.read_csv(INPUT_FILE)
 
 print("=" * 70)
-print("STEP 2: CLEANING & IMPUTATION (claimwise_50000.csv -> clean_del_median_model_M2.csv)")
+print("STEP 2: CLEANING & IMPUTATION (01_raw_claimwise_50000.csv -> 02_cleaned_dedup_median_imputed.csv)")
 print("=" * 70)
 print(df.head())
 print("\nOriginal Dataset Shape:", df.shape)
@@ -80,8 +80,8 @@ print("=" * 70)
 categorical_columns = df_clean.select_dtypes(exclude=np.number).columns.tolist()
 
 for col in categorical_columns:
-    # Remove leading and trailing spaces
-    df_clean[col] = df_clean[col].astype(str).str.strip()
+    # Remove leading and trailing spaces (preserve NaN: don't convert NaN to "nan" string)
+    df_clean[col] = df_clean[col].apply(lambda x: x.strip() if isinstance(x, str) else x)
     if df_clean[col].isnull().any():
         mode_value = df_clean[col].mode()[0]
         df_clean[col] = df_clean[col].fillna(mode_value)

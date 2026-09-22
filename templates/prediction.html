@@ -1,35 +1,84 @@
 {% extends "base.html" %}
 
-{% block title %}Prediction{% endblock %}
+{% block title %}Prediction | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>Insurance Claim Loss Prediction</h1>
+    <div class="page-header">
+        <span class="page-label">PREDICTION INTERFACE</span>
+        <h1>Insurance Claim Loss Prediction</h1>
+        <p>Run a prediction against an existing prepared test record using the exact 130-feature model structure.</p>
+    </div>
 
-    <form>
-        <h2>Customer Information</h2>
-        <label>Customer Group ID</label>
-        <input type="number" placeholder="Enter customer group id">
+    <div class="info-box">
+        <p>
+            <strong>Safe feature strategy:</strong> the current model was trained on the actual encoded columns in <code>X_test.csv</code> ({{ feature_count }} features). This page asks for a test-row number instead of inventing customer, policy, or claim fields that do not exist in the dataset. The selected row is passed to the saved best model unchanged.
+        </p>
+    </div>
 
-        <h2>Policy Information</h2>
-        <label>Policy Category (cat1)</label>
-        <select>
-            <option>Option A</option>
-            <option>Option B</option>
-        </select>
-
-        <h2>Claim Information</h2>
-        <label>Continuous Metric (cont1)</label>
-        <input type="text" placeholder="Enter continuous metric value">
-
-        <h2>Coverage Information</h2>
-        <label>Coverage Level Code</label>
-        <input type="text" placeholder="Enter coverage level">
-
-        <button type="button">Predict Claim Loss</button>
+    {% if model_ready %}
+    <form method="post" action="{{ url_for('prediction') }}">
+        <div class="form-section">
+            <div class="form-section-title">MODEL-READY TEST SAMPLE</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="row_index">Test row number</label>
+                    <input id="row_index" name="row_index" type="number" min="0" max="{{ test_row_count - 1 }}" value="0" required>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">Valid range: 0 to {{ test_row_count - 1 }}.</p>
+                </div>
+                <div class="form-group">
+                    <label>Selected best model</label>
+                    <input type="text" value="{{ best_name }}" readonly>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">The model selected from actual test metrics.</p>
+                </div>
+                <div class="form-group">
+                    <label>Feature structure</label>
+                    <input type="text" value="{{ feature_count }} numeric features" readonly>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">No silent defaults or invented fields are used.</p>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">PREDICT CLAIM LOSS</button>
     </form>
+    {% else %}
+    <div class="info-box">
+        <p><strong>Prediction is unavailable.</strong> Run <code>.venv/bin/python Src/train_models.py</code> first so the best model and its evaluation results are created.</p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="info-box" style="border-left-color: var(--error);">
+        <p><strong>Prediction error:</strong> {{ error }}</p>
+    </div>
+    {% endif %}
+
+    {% if result %}
+    <h2>Prediction Result</h2>
+    <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div class="card">
+            <h3>Test Row</h3>
+            <div class="stat-value">{{ result['row_index'] }}</div>
+            <p>Selected from the prepared test set</p>
+        </div>
+        <div class="card">
+            <h3>Predicted Loss</h3>
+            <div class="stat-value" style="color: var(--accent-primary);">{{ '%.2f'|format(result['predicted_loss']) }}</div>
+            <p>Output from {{ best_name }}</p>
+        </div>
+        <div class="card">
+            <h3>Actual Test Loss</h3>
+            <div class="stat-value">{{ '%.2f'|format(result['actual_loss']) }}</div>
+            <p>Stored target for this test row</p>
+        </div>
+        <div class="card">
+            <h3>Features Passed</h3>
+            <div class="stat-value">{{ result['feature_count'] }}</div>
+            <p>Validated against the trained model</p>
+        </div>
+    </div>
+    {% endif %}
 
 </div>
 

@@ -1,18 +1,18 @@
 import os
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 
 # ==========================================================
 # CLAIMWISE INSURANCE PREDICTION — STEP 4
+# Note: filename legacy 'minmax_stand_norma' but actually uses StandardScaler only (correct for cont features)
 # FEATURE SCALING (STANDARD SCALER)
-# Reads : clean_label_encode_M2.csv
-# Saves : clean_minmax_stand_norma_M2.csv
+# Reads : 03_encoded_label.csv
+# Saves : 04_scaled_standardized.csv
 # ==========================================================
 
-BASE_DIR = "/Users/padaltiruvinayak/Desktop/Credit ML"
-INPUT_FILE = os.path.join(BASE_DIR, "Dataset", "clean_label_encode_M2.csv")
-OUTPUT_FILE = os.path.join(BASE_DIR, "Dataset", "clean_minmax_stand_norma_M2.csv")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Project root: Credit ML
+INPUT_FILE = os.path.join(BASE_DIR, "Dataset", "03_encoded_label.csv")
+OUTPUT_FILE = os.path.join(BASE_DIR, "Dataset", "04_scaled_standardized.csv")
 
 if not os.path.exists(INPUT_FILE):
     print("Input dataset file not found at:")
@@ -26,7 +26,7 @@ df = pd.read_csv(INPUT_FILE)
 data = df.copy()
 
 print("=" * 70)
-print("STEP 4: FEATURE SCALING (clean_label_encode_M2.csv -> clean_minmax_stand_norma_M2.csv)")
+print("STEP 4: FEATURE SCALING (03_encoded_label.csv -> 04_scaled_standardized.csv)")
 print("=" * 70)
 
 # Remove 'id' column if present

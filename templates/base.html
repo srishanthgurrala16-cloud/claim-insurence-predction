@@ -2,65 +2,63 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        {% block title %}
-        ClaimWise Insurance Prediction System
-        {% endblock %}
+        {% block title %}ClaimWise Insurance Prediction System{% endblock %}
     </title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-<header>
+<header class="navbar-header">
+    <div class="header-container">
+        <a href="/" class="brand-wrapper">
+            <div class="brand-icon">🛡️</div>
+            <div class="brand-info">
+                <span class="brand-title">ClaimWise</span>
+                <span class="brand-subtitle">Insurance Prediction System</span>
+            </div>
+        </a>
 
-    <div class="logo">
-        🛡️ ClaimWise Insurance Prediction System
+        <nav class="nav-menu">
+            <a href="/" class="nav-link {% if request.path == '/' or request.path == '/index' %}active{% endif %}">Home</a>
+            <a href="/about" class="nav-link {% if request.path == '/about' %}active{% endif %}">About</a>
+            <a href="/dataset" class="nav-link {% if request.path == '/dataset' %}active{% endif %}">Dataset</a>
+            <a href="/preprocessing" class="nav-link {% if request.path == '/preprocessing' %}active{% endif %}">Preprocessing</a>
+            <a href="/models" class="nav-link {% if request.path == '/models' %}active{% endif %}">Models</a>
+            <a href="/prediction" class="nav-link {% if request.path == '/prediction' %}active{% endif %}">Prediction</a>
+            <a href="/dashboard" class="nav-link {% if request.path == '/dashboard' %}active{% endif %}">Dashboard</a>
+            <a href="/reports" class="nav-link {% if request.path == '/reports' %}active{% endif %}">Reports</a>
+            <a href="/contact" class="nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a>
+        </nav>
     </div>
-
-    <nav>
-
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/dataset">Dataset</a>
-        <a href="/preprocessing">Preprocessing</a>
-        <a href="/visualization">Visualization</a>
-        <a href="/models">ML Models</a>
-        <a href="/prediction">Prediction</a>
-        <a href="/dashboard">Dashboard</a>
-        <a href="/reports">Reports</a>
-        <a href="/contact">Contact</a>
-
-    </nav>
-
 </header>
 
-<main>
-
+<main class="main-content">
     {% block content %}
     {% endblock %}
-
 </main>
 
-<footer>
-
-    <p>© 2026 ClaimWise Insurance Prediction System</p>
-
-    <p>
-        Python | Pandas | NumPy | Scikit-learn | Machine Learning
-    </p>
-
+<footer class="site-footer">
+    <div class="footer-container">
+        <div>
+            <div class="footer-brand">ClaimWise <span>Insurance Prediction System</span></div>
+            <div class="footer-note">Academic Machine Learning Demonstration Project</div>
+        </div>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/dataset">Dataset</a>
+            <a href="/prediction">Prediction</a>
+            <a href="/reports">Reports</a>
+        </div>
+    </div>
 </footer>
 
 </body>
-
 </html>

@@ -1,50 +1,75 @@
 {% extends "base.html" %}
 
-{% block title %}ML Models{% endblock %}
+{% block title %}Models | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>Machine Learning Models</h1>
+    <div class="page-header">
+        <span class="page-label">MODEL BENCHMARKING</span>
+        <h1>MACHINE LEARNING MODELS</h1>
+        <p>Benchmark suite of regression algorithms for predicting continuous insurance claim loss.</p>
+    </div>
 
-    <table>
-        <tr>
-            <th>Model</th>
-            <th>R² Score</th>
-            <th>MAE</th>
-            <th>MSE</th>
-            <th>RMSE</th>
-        </tr>
-        <tr>
-            <td>Linear Regression</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Ridge Regression</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Lasso Regression</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td>Elastic Net</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-    </table>
+    <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 28px;">
+        <div class="card">
+            <h3>Machine Learning Task</h3>
+            <div class="stat-value" style="font-size: 24px; color: var(--text-primary);">Regression</div>
+            <p>Predicting real-valued continuous claim loss outputs</p>
+        </div>
+        <div class="card">
+            <h3>Target Variable</h3>
+            <div class="stat-value" style="font-size: 24px; color: var(--accent-primary);">loss</div>
+            <p>Continuous target vector (y)</p>
+        </div>
+    </div>
+
+    <h2>Actual Test-Set Results</h2>
+    {% if model_ready %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>MAE</th>
+                    <th>MSE</th>
+                    <th>RMSE</th>
+                    <th>R²</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in model_rows %}
+                <tr {% if row['Model'] == best_name %}style="border-left: 4px solid var(--success);"{% endif %}>
+                    <td><strong>{{ row['Model'] }}</strong></td>
+                    <td>{{ '%.2f'|format(row['MAE']) }}</td>
+                    <td>{{ '%.2f'|format(row['MSE']) }}</td>
+                    <td>{{ '%.2f'|format(row['RMSE']) }}</td>
+                    <td>{{ '%.4f'|format(row['R2']) }}</td>
+                    <td>
+                        {% if row['Model'] == best_name %}
+                        <span class="status-badge status-ready">Best model</span>
+                        {% else %}
+                        <span class="status-badge status-completed">Evaluated</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="info-box" style="margin-top: 30px;">
+        <p>
+            <strong>Selected model:</strong> {{ best_name }}. Selection uses the lowest test-set RMSE, with MAE, MSE, and then higher R² as deterministic tie-breakers. Metrics are generated from the actual 10,000 test records.
+        </p>
+    </div>
+    {% else %}
+    <div class="info-box">
+        <p><strong>Model evaluation is not available yet.</strong> Run <code>Src/train_models.py</code> to train the four regression models and generate the real comparison metrics.</p>
+    </div>
+    {% endif %}
 
 </div>
 

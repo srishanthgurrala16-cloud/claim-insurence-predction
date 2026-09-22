@@ -1,57 +1,109 @@
 {% extends "base.html" %}
 
-{% block title %}Preprocessing{% endblock %}
+{% block title %}Preprocessing | ClaimWise Insurance Prediction System{% endblock %}
 
 {% block content %}
 
 <div class="page">
 
-    <h1>Data Preprocessing Workflow</h1>
+    <div class="page-header">
+        <span class="page-label">PREPROCESSING PIPELINE</span>
+        <h1>Data Preprocessing Workflow</h1>
+        <p>A step-by-step visual timeline illustrating how raw claim data is prepared for machine learning.</p>
+    </div>
 
-    <div class="cards">
+    <!-- 8-STEP VERTICAL TIMELINE -->
+    <div class="timeline-vertical">
+        <div class="timeline-v-item">
+            <div class="timeline-v-badge">01</div>
+            <div class="timeline-v-content">
+                <h3>Raw Dataset</h3>
+                <p>Read initial dataset containing 50,000 insurance records and 132 columns.</p>
+            </div>
+        </div>
+
+        <div class="timeline-v-item">
+            <div class="timeline-v-badge">02</div>
+            <div class="timeline-v-content">
+                <h3>Duplicate Removal</h3>
+                <p>Identify and drop duplicate rows to preserve data integrity across partitions.</p>
+            </div>
+        </div>
+
+        <div class="timeline-v-item">
+            <div class="timeline-v-badge">03</div>
+            <div class="timeline-v-content">
+                <h3>Missing Value Handling</h3>
+                <p>Impute missing continuous continuous attributes and categorical mode values.</p>
+            </div>
+        </div>
+
+        <div class="timeline-v-item">
+            <div class="timeline-v-badge">04</div>
+            <div class="timeline-v-content">
+                <h3>Categorical Encoding</h3>
+                <p>Apply <code>LabelEncoder</code> to convert text categories (cat1–cat116) into numerical format.</p>
+            </div>
+        </div>
+
+        <div class="timeline-v-item">
+            <div class="timeline-v-badge">05</div>
+            <div class="timeline-v-content">
+                <h3>Feature Scaling</h3>
+                <p>Standardize continuous numerical attributes (cont1–cont14) using <code>StandardScaler</code>.</p>
+            </div>
+        </div>
+
+        <div class="timeline-v-item">
+            <div class="timeline-v-badge">06</div>
+            <div class="timeline-v-content">
+                <h3>Normalization</h3>
+                <p>Ensure continuous feature distributions have zero mean and unit variance for model fitting.</p>
+            </div>
+        </div>
+
+        <div class="timeline-v-item">
+            <div class="timeline-v-badge">07</div>
+            <div class="timeline-v-content">
+                <h3>Feature / Target Separation</h3>
+                <p>Isolate input feature matrix \(X\) (130 features), drop <code>id</code> column, and set target <code>loss</code>.</p>
+            </div>
+        </div>
+
+        <div class="timeline-v-item">
+            <div class="timeline-v-badge">08</div>
+            <div class="timeline-v-content">
+                <h3>Train-Test Split</h3>
+                <p>Partition dataset into 80% Training (40,000 rows) and 20% Testing (10,000 rows) subsets.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL PREPROCESSING RESULT SUMMARY -->
+    <h2>FINAL PREPROCESSING RESULT</h2>
+    <div class="cards cards-4">
         <div class="card">
-            <h3>1. Dataset Loading</h3>
-            <p>Read raw claim dataset (50,000 records × 132 features) and perform structural data audit.</p>
+            <h3>Final Records</h3>
+            <div class="stat-value">50,000</div>
+            <p>Clean claim rows</p>
         </div>
 
         <div class="card">
-            <h3>2. Duplicate Removal</h3>
-            <p>Identify and drop duplicate rows to preserve data integrity across the dataset.</p>
+            <h3>Final Columns</h3>
+            <div class="stat-value">131</div>
+            <p>Processed schema</p>
         </div>
 
         <div class="card">
-            <h3>3. Missing Value Handling</h3>
-            <p>Missing numerical values are handled using median imputation and categorical values using mode imputation.</p>
+            <h3>Input Features</h3>
+            <div class="stat-value">130</div>
+            <p>Predictors (\(X\))</p>
         </div>
 
         <div class="card">
-            <h3>4. Numerical Feature Imputation</h3>
-            <p>Replace missing continuous values (cont1–cont14) with median values.</p>
-        </div>
-
-        <div class="card">
-            <h3>5. Categorical Feature Imputation</h3>
-            <p>Clean text whitespace and replace missing categorical values (cat1–cat116) with mode values.</p>
-        </div>
-
-        <div class="card">
-            <h3>6. Categorical Encoding</h3>
-            <p>Apply LabelEncoder to convert categorical text features into integer numerical representations.</p>
-        </div>
-
-        <div class="card">
-            <h3>7. Feature Scaling</h3>
-            <p>Standardize continuous numerical attributes using StandardScaler fit on training features.</p>
-        </div>
-
-        <div class="card">
-            <h3>8. Target Separation</h3>
-            <p>Separate target column 'loss' from input feature matrix X.</p>
-        </div>
-
-        <div class="card">
-            <h3>9. Train-Test Split</h3>
-            <p>Split preprocessed dataset into 80% Training (40,000) and 20% Testing (10,000) subsets.</p>
+            <h3>Missing / Duplicates</h3>
+            <div class="stat-value" style="color: var(--success);">0</div>
+            <p>Verified zero missing or duplicate records</p>
         </div>
     </div>
 
